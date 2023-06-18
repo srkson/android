@@ -24,6 +24,7 @@ import java.util.LinkedList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView labelRecipes;
+    private ImageView slika;
     private ProgressDialog dijalogZaCekanje;
     private Button preuzmi;
     private static String url = "https://api.edamam.com/api/recipes/v2?type=public&q=potato%2C%20chicken%2C%20onion&app_id=b97ec164&app_key=a36ae9523c4c9b48a975d5c715491461&field=label&field=image";
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         preuzmi = findViewById(R.id.buttonDownload);
         labelRecipes = findViewById(R.id.labelRecipes);
         labelRecipes.setMovementMethod(new ScrollingMovementMethod());
+        slika = findViewById(R.id.slika);
         preuzmi.setOnClickListener(this);
     }
 
@@ -68,13 +70,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     labelRecipes.setText(prikaz);
+                    new TaskPreuzimanjeSlike().execute(recipes.get(0).getImgpath());
 
                 } catch (Exception e) {e.printStackTrace();}
             }
         });
     }
 
-    /***
     public class TaskPreuzimanjeSlike extends AsyncTask<String, Void, Bitmap> {
 
         @Override
@@ -106,5 +108,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-    } */
+    }
 }
